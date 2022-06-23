@@ -11,7 +11,7 @@ namespace CRUDWithDatabase
     {
         public  SqlConnection getData(string databaseName)
         {
-            string connectionString = "Data source = localhost ; Initial Catalog = Dbtest ; User = lamduc ; Password = 123456";
+            string connectionString = "Data source = localhost ; Initial Catalog = Dbtest ;  Integrated security = SSPI";
             SqlConnection connection = new SqlConnection(connectionString);
             return connection;
         }
