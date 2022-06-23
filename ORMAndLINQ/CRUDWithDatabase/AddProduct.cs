@@ -8,7 +8,7 @@ namespace CRUDWithDatabase
 {
     class AddProduct
     {
-        SqlConnection connection = new SqlServerConnection().getData("Dbtest");
+        SqlConnection connection = new SqlServerConnection().getData();
         public void getData(Product product)
         {
             connection.Open();

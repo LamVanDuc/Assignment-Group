@@ -9,7 +9,7 @@ namespace CRUDWithDatabase
 {
     class SqlServerConnection
     {
-        public  SqlConnection getData(string databaseName)
+        public  SqlConnection getData()
         {
             string connectionString = "Data source = localhost ; Initial Catalog = Dbtest ;  Integrated security = SSPI";
             SqlConnection connection = new SqlConnection(connectionString);
