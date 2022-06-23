@@ -4,20 +4,42 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace CRUDWithDatabase
 {
     class Program
     {
+        
         static void Main(string[] args)
         {
-            SqlServerConnection sql = new SqlServerConnection();
-            SqlConnection conn =  sql.getData("Dbtest");
-            if (conn != null)
+            Program pro = new Program();
+            while (true)
             {
-                Console.WriteLine("ket noi thanh cong");
+                Console.WriteLine("1. Show all");
+                Console.WriteLine("2. Add Product");
+                int c = int.Parse(Console.ReadLine());
+                switch (c)
+
+                {
+                    case 1:
+                        pro.ShowAll();
+                        break;
+                    default:
+                        break;
+                }
             }
             Console.ReadLine();
+
+        }
+        public void ShowAll()
+        {
+            ViewAllProduct viewall = new ViewAllProduct();
+            List<Product> products = viewall.getData();
+            foreach (var item in products)
+            {
+                Console.WriteLine(item.Id + item.ProductName);
+            }
         }
     }
 }
+    
+
