@@ -8,7 +8,7 @@ namespace CRUDWithDatabase
 {
     class Program
     {
-        
+
         static void Main(string[] args)
         {
             Program pro = new Program();
@@ -41,5 +41,3 @@ namespace CRUDWithDatabase
         }
     }
 }
-    
-
