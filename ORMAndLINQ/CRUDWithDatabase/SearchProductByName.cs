@@ -7,8 +7,18 @@ using System.Data.SqlClient;
 namespace CRUDWithDatabase
 {
     class SearchProductByName
-    { 
-        //truong
+    {
+        public void GetData(string name)
+        {
+            List<Product> products = new ViewAllProduct().getData();
+            var find = products.Where(pro => pro.ProductName.Contains(name));
+
+            foreach (var product in find)
+            {
+                Console.WriteLine(product.Id+"name :"+ product.ProductName +"  desc : "+product.ProductDesc);
+            }
+                
+        }
          
     }
 }
