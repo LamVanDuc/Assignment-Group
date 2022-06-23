@@ -96,11 +96,18 @@ namespace CRUDWithDatabase
             DeleteProduct delete = new DeleteProduct();
             Console.WriteLine("Enter product id :");
             int id = int.Parse(Console.ReadLine());
-            if ((products.Select(p => p.Id)).Equals(id))
+            int count = 0;
+            foreach (var item in products)
             {
-                delete.RemoveProduct(id);
+                if (item.Id.Equals(id))
+                {
+                    delete.RemoveProduct(id);
+                    count = 1;
+                    break;
+                }
             }
-            else {
+            
+            if(count == 0) {
                 Console.WriteLine("ID {0} Not Found !" ,id);
             }
             
@@ -111,23 +118,29 @@ namespace CRUDWithDatabase
 
             Console.WriteLine("Enter product id to update : ");
             int id = int.Parse(Console.ReadLine());
-
-            if ((products.Select(p => p.Id)).Equals(id))
+            int count = 0;
+            foreach (var item in products)
             {
-                Console.WriteLine("Enter new product Name :");
-                string name = Console.ReadLine();
-                Console.WriteLine("Enter new product Desc : ");
-                string desc = Console.ReadLine();
-                Console.WriteLine("Enter new price :");
-                double price = double.Parse(Console.ReadLine());
-                EditProduct edit = new EditProduct();
-                edit.EditProductById(new Product() { Id = id, ProductName = name, ProductDesc = desc, Price = price });
+                if (item.Id.Equals(id))
+                {
+                    Console.WriteLine("Enter new product Name :");
+                    string name = Console.ReadLine();
+                    Console.WriteLine("Enter new product Desc : ");
+                    string desc = Console.ReadLine();
+                    Console.WriteLine("Enter new price :");
+                    double price = double.Parse(Console.ReadLine());
+                    EditProduct edit = new EditProduct();
+                    edit.EditProductById(new Product() { Id = id, ProductName = name, ProductDesc = desc, Price = price });
+                    count = 1;
+                    break;
+                }
+                
             }
-            else
+            if (count == 0)
             {
-
                 Console.WriteLine("id {0} not found !", id);
             }
+            
             
         }
     }
