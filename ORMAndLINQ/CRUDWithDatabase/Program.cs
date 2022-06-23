@@ -29,7 +29,7 @@ namespace CRUDWithDatabase
                         break;
                     case 4:// view all product
                         break;
-                    case 5: // Search by id
+                    case 5: pro.SearchProductById();
                         break;
                     case 6: pro.SearchProductByName();
                         break;
@@ -81,6 +81,13 @@ namespace CRUDWithDatabase
             Console.WriteLine("Enter product name : ");
             string name = Console.ReadLine();
             search.GetData(name);
+        }
+        public void SearchProductById()
+        {
+            SearchProductById searchid = new SearchProductById();
+            Console.WriteLine("Enter Id : ");
+            int id = int.Parse(Console.ReadLine());
+            searchid.GetData(id);
         }
     }
 }
