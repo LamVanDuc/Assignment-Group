@@ -12,12 +12,6 @@ namespace CRUDWithDatabase
         public void RemoveProduct(int id)
         {
             SqlConnection connection = new SqlServerConnection().getData();
-            ViewAllProduct viewall = new ViewAllProduct();
-            List<Product> products = viewall.getData();
-            var check = products.Where(pro=> pro.Id == id);
-
-            if (check != null)
-            {
                 connection.Open();
 
                 SqlCommand command = new SqlCommand("Delete from product where id = @id ",connection);
@@ -32,11 +26,8 @@ namespace CRUDWithDatabase
                     Console.WriteLine("Delete false !");
                 }
 
-            }
-            else
-            {
-                Console.WriteLine("ID {0} not found !",id);
-            }
+            
+            
         }
     }
 }

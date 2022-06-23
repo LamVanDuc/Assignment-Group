@@ -8,7 +8,7 @@ namespace CRUDWithDatabase
 {
     class Program
     {
-        
+        List<Product> products = new ViewAllProduct().getData();
         static void Main(string[] args)
         {
             Program pro = new Program();
@@ -55,9 +55,9 @@ namespace CRUDWithDatabase
         }
         public void ShowAll()
         {
-            ViewAllProduct viewall = new ViewAllProduct();
-            List<Product> products = viewall.getData();
-            foreach (var item in products)
+            
+            var product = products.OrderBy(pro => pro.ProductName);
+            foreach (var item in product)
             {
                 Console.WriteLine(item.Id +"      "+ item.ProductName);
             }
@@ -87,11 +87,8 @@ namespace CRUDWithDatabase
             SearchProductById searchid = new SearchProductById();
             Console.WriteLine("Enter Id : ");
             int id = int.Parse(Console.ReadLine());
-            bool check = searchid.GetData(id);
-            if (check == false)
-            {
-                Console.WriteLine("Not found !");
-            }
+            searchid.GetData(id);
+            
 
         }
         public void DeleteProduct()
@@ -99,39 +96,37 @@ namespace CRUDWithDatabase
             DeleteProduct delete = new DeleteProduct();
             Console.WriteLine("Enter product id :");
             int id = int.Parse(Console.ReadLine());
-            delete.RemoveProduct(id);
+            if ((products.Select(p => p.Id)).Equals(id))
+            {
+                delete.RemoveProduct(id);
+            }
+            else {
+                Console.WriteLine("ID {0} Not Found !" ,id);
+            }
+            
         }
         public void EditProductByid()
         {
-            List<Product> products = new ViewAllProduct().getData();
+            
 
             Console.WriteLine("Enter product id to update : ");
             int id = int.Parse(Console.ReadLine());
-            int i =0;
-            foreach (Product item in products)
-            {
-                if (item.Id.Equals(id))
-                {
-                    Console.WriteLine("Enter new product Name :");
-                    string name = Console.ReadLine();
-                    Console.WriteLine("Enter new product Desc : ");
-                    string desc = Console.ReadLine();
-                    Console.WriteLine("Enter new price :");
-                    double price = double.Parse(Console.ReadLine());
-                    EditProduct edit = new EditProduct();
-                    edit.EditProductById(new Product() { Id = id, ProductName = name, ProductDesc = desc, Price = price });
-                    i = 0;
-                    break;
-                }
-                else
-                {
 
-                    i = 1;
-                }
-            }
-            if (i == 1)
+            if ((products.Select(p => p.Id)).Equals(id))
             {
-                Console.WriteLine("id {0} not found !" ,id);
+                Console.WriteLine("Enter new product Name :");
+                string name = Console.ReadLine();
+                Console.WriteLine("Enter new product Desc : ");
+                string desc = Console.ReadLine();
+                Console.WriteLine("Enter new price :");
+                double price = double.Parse(Console.ReadLine());
+                EditProduct edit = new EditProduct();
+                edit.EditProductById(new Product() { Id = id, ProductName = name, ProductDesc = desc, Price = price });
+            }
+            else
+            {
+
+                Console.WriteLine("id {0} not found !", id);
             }
             
         }
