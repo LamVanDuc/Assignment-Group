@@ -23,7 +23,7 @@ namespace CRUDWithDatabase
                     case 1:
                         pro.ShowAll();
                         break;
-                    case 2: //add product
+                    case 2: pro.AddProduct();
                         break;
                     case 3: // delete product
                         break;
@@ -61,6 +61,18 @@ namespace CRUDWithDatabase
             {
                 Console.WriteLine(item.Id + item.ProductName);
             }
+        }
+        public void AddProduct()
+        {
+            AddProduct add = new AddProduct();
+            Console.WriteLine("Enter product name : ");
+            string name = Console.ReadLine();
+            Console.WriteLine("Enter product Description : ");
+            string desc = Console.ReadLine();
+            Console.WriteLine("Enter product Price :");
+            double price = double.Parse(Console.ReadLine());
+            Product product = new Product {ProductName = name , ProductDesc = desc , Price = price};
+            add.getData(product);
         }
     }
 }

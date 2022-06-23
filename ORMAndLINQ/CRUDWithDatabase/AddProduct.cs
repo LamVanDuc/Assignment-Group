@@ -9,13 +9,14 @@ namespace CRUDWithDatabase
     class AddProduct
     {
         SqlConnection connection = new SqlServerConnection().getData("Dbtest");
-        public void getData()
+        public void getData(Product product)
         {
-            List<Product> products = new List<Product>();
-            string query = "insert into product values(@value1 , @value2 , @value3)";
-            SqlCommand command = new SqlCommand(query, connection);
             connection.Open();
-
+            SqlCommand command = new SqlCommand("Insert into product values (@proName,@proDesc,@price)", connection);
+            command.Prepare();
+            command.Parameters.AddWithValue("@proName", product.ProductName);
+            command.Parameters.AddWithValue("@proDesc", product.ProductDesc);
+            command.Parameters.AddWithValue("@price", product.Price);
             int check = command.ExecuteNonQuery();
             if (check>=1)
             {
