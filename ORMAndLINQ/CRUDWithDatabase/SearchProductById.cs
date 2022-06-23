@@ -8,15 +8,25 @@ namespace CRUDWithDatabase
 {
     class SearchProductById
     {
-        public void GetData(int id)
+        public bool GetData(int id)
         {
+            bool check = false;
             List<Product> products = new ViewAllProduct().getData();
             var findid = products.Where(pro => pro.Id.Equals(id));
-
-            foreach (var product in findid)
+            if (findid != null)
             {
-                Console.WriteLine(product.Id+"name :"+ product.ProductName +"  desc : "+product.ProductDesc);
+                check = true;
+                foreach (var product in findid)
+                {
+                    Console.WriteLine(product.Id + "name :" + product.ProductName + "  desc : " + product.ProductDesc);
+                }
             }
+            else
+            {
+                Console.WriteLine("Id {0} not found !",id);
+                check = false;
+            }
+            return check;
         }
     }
 }

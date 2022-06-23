@@ -10,7 +10,7 @@ namespace CRUDWithDatabase
     
     class ViewAllProduct
     {
-        SqlConnection connection = new SqlServerConnection().getData("Dbtest");
+        SqlConnection connection = new SqlServerConnection().getData();
         public List<Product> getData()
         {
             List<Product> products = new List<Product>();

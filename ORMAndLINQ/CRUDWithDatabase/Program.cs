@@ -25,15 +25,15 @@ namespace CRUDWithDatabase
                         break;
                     case 2: pro.AddProduct();
                         break;
-                    case 3: // delete product
+                    case 3: pro.DeleteProduct();
                         break;
-                    case 4:// view all product
+                    case 4:pro.EditProductByid();
                         break;
                     case 5: pro.SearchProductById();
                         break;
                     case 6: pro.SearchProductByName();
                         break;
-                    case 7://end
+                    case 7:Environment.Exit(0);
                         break;
                     default:
                         break;
@@ -48,7 +48,7 @@ namespace CRUDWithDatabase
             Console.WriteLine("1. Show all");
             Console.WriteLine("2. Add Product");
             Console.WriteLine("3. Delete product");
-            Console.WriteLine("4. View all product");
+            Console.WriteLine("4. Edit product");
             Console.WriteLine("5. Search product by id");
             Console.WriteLine("6. Search product by name");
             Console.WriteLine("7. End");
@@ -59,7 +59,7 @@ namespace CRUDWithDatabase
             List<Product> products = viewall.getData();
             foreach (var item in products)
             {
-                Console.WriteLine(item.Id + item.ProductName);
+                Console.WriteLine(item.Id +"      "+ item.ProductName);
             }
         }
         public void AddProduct()
@@ -87,7 +87,53 @@ namespace CRUDWithDatabase
             SearchProductById searchid = new SearchProductById();
             Console.WriteLine("Enter Id : ");
             int id = int.Parse(Console.ReadLine());
-            searchid.GetData(id);
+            bool check = searchid.GetData(id);
+            if (check == false)
+            {
+                Console.WriteLine("Not found !");
+            }
+
+        }
+        public void DeleteProduct()
+        {
+            DeleteProduct delete = new DeleteProduct();
+            Console.WriteLine("Enter product id :");
+            int id = int.Parse(Console.ReadLine());
+            delete.RemoveProduct(id);
+        }
+        public void EditProductByid()
+        {
+            List<Product> products = new ViewAllProduct().getData();
+
+            Console.WriteLine("Enter product id to update : ");
+            int id = int.Parse(Console.ReadLine());
+            int i =0;
+            foreach (Product item in products)
+            {
+                if (item.Id.Equals(id))
+                {
+                    Console.WriteLine("Enter new product Name :");
+                    string name = Console.ReadLine();
+                    Console.WriteLine("Enter new product Desc : ");
+                    string desc = Console.ReadLine();
+                    Console.WriteLine("Enter new price :");
+                    double price = double.Parse(Console.ReadLine());
+                    EditProduct edit = new EditProduct();
+                    edit.EditProductById(new Product() { Id = id, ProductName = name, ProductDesc = desc, Price = price });
+                    i = 0;
+                    break;
+                }
+                else
+                {
+
+                    i = 1;
+                }
+            }
+            if (i == 1)
+            {
+                Console.WriteLine("id {0} not found !" ,id);
+            }
+            
         }
     }
 }
